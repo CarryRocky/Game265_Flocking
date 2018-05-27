@@ -33,15 +33,15 @@ FlockingElement::FlockingElement()
 
 void FlockingElement::updatePos(float dt)
 {
-	if (computeVecLength(desiredVec) >= 0.1)
+	if (COMPUTE_LENGTH(desiredVec) >= 0.1)
 	{
-		acceleration = computeUnitVec(desiredVec)*maxSpeed - direction * speed;
+		acceleration = COMPUTE_UNIT(desiredVec)*maxSpeed - direction * speed;
 	}
 	else
 		acceleration = Vector2f(0,0);
 
 	Vector2f newDir = direction * speed + acceleration * dt;
-	direction = computeUnitVec(newDir);
+	direction = COMPUTE_UNIT(newDir);
 
 	Vector2f newPos = getPosition() + direction * speed*dt;
 	if (newPos.x < 0)

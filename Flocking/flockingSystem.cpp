@@ -188,15 +188,22 @@ void FlockingSystem::computeForce(FlockingElement* element)
 
 	Vector2f desireVec(0, 0);
 	if (tempStruct.seperationSum > 0)
-		desireVec += element->computeUnitVec(tempStruct.seperationVec / (float)tempStruct.seperationSum);
+	{
+		tempStruct.seperationVec /= (float)tempStruct.seperationSum;
+		desireVec += COMPUTE_UNIT(tempStruct.seperationVec);
+	}
 
 	if (tempStruct.alignmentSum > 0)
-		desireVec += element->computeUnitVec(tempStruct.alignmentVec / (float)tempStruct.alignmentSum);
+	{
+		tempStruct.alignmentVec /= (float)tempStruct.alignmentSum;
+		desireVec += COMPUTE_UNIT(tempStruct.alignmentVec);
+	}
 	
 	if (tempStruct.cohesionSum > 1)
 	{
 		Vector2f desPoint = tempStruct.cohesionVec / (float)tempStruct.cohesionSum;
-		desireVec += element->computeUnitVec(desPoint - element->getPosition());
+		desPoint -= element->getPosition();
+		desireVec += COMPUTE_UNIT(desPoint);
 	}
 
 	element->setDesiredVec(desireVec);

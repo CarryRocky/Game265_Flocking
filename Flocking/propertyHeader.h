@@ -14,3 +14,6 @@
 #define BUCK_COLUMN 4
 
 #define CHECK_RANGE 100
+
+#define COMPUTE_LENGTH(a) sqrt(a.x*a.x + a.y*a.y)
+#define COMPUTE_UNIT(a) (a / COMPUTE_LENGTH(a))

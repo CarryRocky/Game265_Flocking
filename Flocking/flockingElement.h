@@ -27,11 +27,6 @@ public:
 	{
 		return speed * direction;
 	}
-
-	Vector2f computeUnitVec(Vector2f a)
-	{
-		return a / computeVecLength(a);
-	}
 private:
 	float speed;
 	float maxSpeed;
@@ -40,11 +35,6 @@ private:
 	Vector2f desiredVec;
 
 	int blockIndex;
-
-	float computeVecLength(Vector2f a)
-	{
-		return sqrt(a.x*a.x + a.y*a.y);
-	}
 
 	float computeDotProduct(Vector2f a, Vector2f b)
 	{
