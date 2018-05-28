@@ -56,7 +56,7 @@ void FlockingElement::updatePos(float dt)
 
 	setPosition(newPos);
 
-	float radian = acos(computeDotProduct(Vector2f(0,-1),direction));
+	float radian = acos(COMPUTE_DOT(Vector2f(0,-1),direction));
 	float angle = radian * 180 / PI;
 	if (direction.x < 0)
 		angle = -angle;

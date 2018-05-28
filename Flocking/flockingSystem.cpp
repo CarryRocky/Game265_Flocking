@@ -9,8 +9,8 @@ FlockingSystem::FlockingSystem()
 	buckWidth = WIN_WIDTH / BUCK_COLUMN;
 
 	needAlignment = true;
-	needSeperation = false;
-	needCohesion = false;
+	needSeperation = true;
+	needCohesion = true;
 }
 
 FlockingSystem::~FlockingSystem()
@@ -81,12 +81,12 @@ void FlockingSystem::computeDesireById(int blockId,FlockingElement* element,int 
 			continue;
 		Vector2f curPos = curElement->getPosition();
 		Vector2f newPos = Vector2f(curPos.x + xOffset, curPos.y + yOffset);
-		float disVec = computeDistance(element->getPosition(), newPos);
+		float disVec = COMPUTE_DISTANCE(element->getPosition(), newPos);
 		if (disVec <= CHECK_RANGE)
 		{
 			if (needSeperation)
 			{
-				Vector2f diffVec = subtractVector(element->getPosition(), newPos);
+				Vector2f diffVec = COMPUTE_SUBSTRATION(element->getPosition(), newPos);
 				tempStruct.seperationVec += diffVec;
 				tempStruct.seperationSum++;
 			}

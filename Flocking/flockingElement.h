@@ -35,9 +35,4 @@ private:
 	Vector2f desiredVec;
 
 	int blockIndex;
-
-	float computeDotProduct(Vector2f a, Vector2f b)
-	{
-		return a.x*b.x + a.y*b.y;
-	}
 };

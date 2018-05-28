@@ -46,16 +46,6 @@ private:
 
 	void updateFlockings(float);
 
-	float computeDistance(Vector2f a, Vector2f b)
-	{
-		return sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
-	}
-
-	Vector2f subtractVector(Vector2f a, Vector2f b)
-	{
-		return Vector2f(a.x - b.x,a.y - b.y);
-	}
-
 	int getVecIndex(int bid, FlockingElement* e)
 	{
 		for (int i = 0; i < buckVec[bid].size();i++)
