@@ -22,9 +22,50 @@ public:
 	void decreaseFlocking();
 	void updateSystem(float);
 
-	vector<FlockingElement*> getAllFlocking()
+	void renderAllFlocking(RenderWindow *window)
 	{
-		return flockingVec;
+		for (int i = 0; i < flockingVec.size(); i++)
+		{
+			window->draw(*flockingVec[i]);
+		}
+	}
+
+	int getSysSize()
+	{
+		return flockingVec.size();
+	}
+
+	int getSeperationFactor()
+	{
+		return seperationFactor;
+	}
+
+	int getCohesionFactor()
+	{
+		return cohesionFactor;
+	}
+
+	int getAlignmentFactor()
+	{
+		return alignmentFactor;
+	}
+
+	void addSeperationFactor(int addNum)
+	{
+		seperationFactor += addNum;
+		seperationFactor = (seperationFactor < 0) ? 0 : seperationFactor;
+	}
+
+	void addCohesionFactor(int addNum)
+	{
+		cohesionFactor += addNum;
+		cohesionFactor = (cohesionFactor < 0) ? 0 : cohesionFactor;
+	}
+
+	void addAlignmentFactor(int addNum)
+	{
+		alignmentFactor += addNum;
+		alignmentFactor = (alignmentFactor < 0) ? 0 : alignmentFactor;
 	}
 private:
 	vector<FlockingElement*> flockingVec;
@@ -33,9 +74,9 @@ private:
 	int buckHeight;
 	int buckWidth;
 
-	bool needSeperation;
-	bool needAlignment;
-	bool needCohesion;
+	int seperationFactor;
+	int cohesionFactor;
+	int alignmentFactor;
 
 	void updateBuck();
 	int getBlockId(Vector2f);

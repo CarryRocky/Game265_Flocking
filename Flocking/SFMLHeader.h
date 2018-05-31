@@ -9,6 +9,7 @@
 #include <SFML/Main.hpp>
 
 #include <vector>
+#include <string>
 
 using namespace sf;
 using namespace std;

@@ -8,9 +8,9 @@ FlockingSystem::FlockingSystem()
 	buckHeight = WIN_HEIGHT / BUCK_ROW;
 	buckWidth = WIN_WIDTH / BUCK_COLUMN;
 
-	needAlignment = true;
-	needSeperation = true;
-	needCohesion = true;
+	alignmentFactor = 0;
+	cohesionFactor = 0;
+	seperationFactor = 0;
 }
 
 FlockingSystem::~FlockingSystem()
@@ -84,18 +84,18 @@ void FlockingSystem::computeDesireById(int blockId,FlockingElement* element,int 
 		float disVec = COMPUTE_DISTANCE(element->getPosition(), newPos);
 		if (disVec <= CHECK_RANGE)
 		{
-			if (needSeperation)
+			if (seperationFactor != 0)
 			{
 				Vector2f diffVec = COMPUTE_SUBSTRATION(element->getPosition(), newPos);
 				tempStruct.seperationVec += diffVec;
 				tempStruct.seperationSum++;
 			}
-			if (needAlignment)
+			if (alignmentFactor != 0)
 			{
 				tempStruct.alignmentVec += curElement->getVelocity();
 				tempStruct.alignmentSum++;
 			}
-			if (needCohesion)
+			if (cohesionFactor != 0)
 			{
 				tempStruct.cohesionVec += curElement->getPosition();
 				tempStruct.cohesionSum++;
@@ -190,20 +190,20 @@ void FlockingSystem::computeForce(FlockingElement* element)
 	if (tempStruct.seperationSum > 0)
 	{
 		tempStruct.seperationVec /= (float)tempStruct.seperationSum;
-		desireVec += COMPUTE_UNIT(tempStruct.seperationVec);
+		desireVec += (float)seperationFactor * COMPUTE_UNIT(tempStruct.seperationVec);
 	}
 
 	if (tempStruct.alignmentSum > 0)
 	{
 		tempStruct.alignmentVec /= (float)tempStruct.alignmentSum;
-		desireVec += COMPUTE_UNIT(tempStruct.alignmentVec);
+		desireVec += (float)alignmentFactor * COMPUTE_UNIT(tempStruct.alignmentVec);
 	}
 	
 	if (tempStruct.cohesionSum > 1)
 	{
 		Vector2f desPoint = tempStruct.cohesionVec / (float)tempStruct.cohesionSum;
 		desPoint -= element->getPosition();
-		desireVec += COMPUTE_UNIT(desPoint);
+		desireVec +=  (float)cohesionFactor * COMPUTE_UNIT(desPoint);
 	}
 
 	element->setDesiredVec(desireVec);

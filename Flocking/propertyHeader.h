@@ -20,3 +20,5 @@
 #define COMPUTE_DOT(a,b) (a.x*b.x + a.y*b.y)
 #define COMPUTE_DISTANCE(a,b) sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y))
 #define COMPUTE_SUBSTRATION(a,b) Vector2f(a.x - b.x,a.y - b.y)
+
+#define GAP_TIME 0.2
